@@ -1,19 +1,23 @@
 import React from 'react';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 
-import { GamesSliderContainer, ArrowBox, Slider } from './styles';
+import * as C from './styles';
 
 const GamesSlider: React.FC = () => {
   return (
-    <GamesSliderContainer>
-      <ArrowBox>
+    <C.GamesSliderContainer>
+      <C.ArrowBox>
         <IoIosArrowBack />
-      </ArrowBox>
-      <Slider></Slider>
-      <ArrowBox>
+      </C.ArrowBox>
+      <C.Slider>
+        <C.InnerSlider>
+          
+        </C.InnerSlider>
+      </C.Slider>
+      <C.ArrowBox>
         <IoIosArrowForward />
-      </ArrowBox>
-    </GamesSliderContainer>
+      </C.ArrowBox>
+    </C.GamesSliderContainer>
   );
 };
 
