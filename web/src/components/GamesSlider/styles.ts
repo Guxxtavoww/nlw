@@ -4,21 +4,24 @@ export const GamesSliderContainer = styled.div`
   position: relative;
   width: 100%;
   padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: .5fr 4fr .5fr;
+    
 
   @media screen and (max-width: 600px) {
     padding: 0;
   }
 `;
 
-export const ArrowBox = styled.button<{ isLeft?: boolean }>`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: ${(props) => props.isLeft && '5px'};
-  right: ${(props) => !props.isLeft && '5px'};
+export const Slider = styled.div`
+    overflow-x: hidden;
+`;
 
-  color: #f9f9f9;
-  & > * {
-    font-size: 1.8rem;
+export const ArrowBox = styled.button`
+  color: #A1A1AA;
+  font-size: 1.8rem;
+
+  &:hover {
+    color: #fdfdfd;
   }
 `;
