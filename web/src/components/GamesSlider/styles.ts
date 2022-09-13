@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const GamesSliderContainer = styled.div`
   position: relative;
   width: 100%;
+  padding: 0 1.5rem;
+
+  @media screen and (max-width: 600px) {
+    padding: 0;
+  }
 `;
 
 export const ArrowBox = styled.button<{ isLeft?: boolean }>`
