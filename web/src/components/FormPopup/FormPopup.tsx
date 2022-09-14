@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import * as C from './styles';
 import { IFormData } from '../../types';
@@ -8,43 +8,49 @@ interface IFormPopupProps {
   closePopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+const days = ['DO', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
+
 const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
+  const [hasMic, setHasMic] = useState(true);
+  const [whenYouPlay, setWhenYouPlay] = useState<string[]>(days);
+
   const [formData, setFormData] = useState<IFormData>({
     gamename: '',
     name: '',
     gameYears: '',
     discordName: '',
-    whenYouPlay: [''],
     dailyHrs: '',
     gameTime: '',
-    hasMic: 'on',
   });
+
+  const handleClose = () => closePopup(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    const { name, value, type } = e.target;
-
-    if (type === 'checkbox') {
-      setFormData((prevState) => ({
-        ...prevState,
-        hasMic: prevState.hasMic === 'on' ? 'off' : 'on',
-      }));
-    }
+    const { name, value } = e.target;
 
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleClose = () => closePopup(false);
+  const handleWhenYouPlay = () => {
+    
+  };
 
-  console.log(formData);
+  const handleSubmit = useCallback((e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const data = { ...formData, hasMic, whenYouPlay };
+
+    console.log(data);
+  }, []);
 
   return (
     <C.FormPopupContainer className="app_flex">
       <C.Popup>
         <C.PopupInnerWrapper>
           <h2>Publique um anúncio</h2>
-          <C.PopupForm>
+          <C.PopupForm onSubmit={handleSubmit}>
             <C.InputContainer>
               <C.InputBx>
                 <C.InputLabel htmlFor="gamename">Qual o game?</C.InputLabel>
@@ -109,13 +115,18 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                 <C.InputLabel htmlFor="whenYouPlay">
                   Quando costuma jogar?
                 </C.InputLabel>
-                <input
-                  type="text"
-                  name="whenYouPlay"
-                  id="whenYouPlay"
-                  pattern="[0-9]*"
-                  placeholder="Tudo bem ser ZERO"
-                />
+                <C.MultipleFields>
+                  {days.map((item, index) => (
+                    <C.OptionDay 
+                      key={index} 
+                      className="app_flex" 
+                      isSelected={item === whenYouPlay[index]} 
+                      onClick={handleWhenYouPlay}
+                    >
+                      {item}
+                    </C.OptionDay>
+                  ))}
+                </C.MultipleFields>
               </C.InputBx>
               <C.InputBx>
                 <C.InputLabel>Quantas horas você joga ?</C.InputLabel>
@@ -135,8 +146,8 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   type="checkbox"
                   name="hasMic"
                   id="hasMic"
-                  checked={formData.hasMic === 'on' ? true : false}
-                  onChange={handleChange}
+                  defaultChecked={hasMic}
+                  onChange={() => setHasMic((prevState) => !prevState)}
                 />
                 <C.InputLabel htmlFor="hasMic">
                   Você tem microfone?

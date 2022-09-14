@@ -2,10 +2,10 @@ import styled, { keyframes } from 'styled-components';
 
 const showPopup = keyframes`
     from {
-        scale: 0;
+      scale: 0;
     }
     to {
-        scale: 1;
+      scale: 1;
     }
 `;
 
@@ -89,6 +89,11 @@ export const InputBx = styled.div<{ isCheckbox?: boolean }>`
       accent-color: #18181b;
       padding: 8px;
       color: #34d399;
+      width: 1.125rem;
+      height: 1.125rem;
+      border: none;
+      border-radius: 4px;
+      border: none;
     }
     ::placeholder,
     option,
@@ -101,12 +106,22 @@ export const InputBx = styled.div<{ isCheckbox?: boolean }>`
 
   select {
     cursor: pointer;
+    option {
+      &:first-child {
+        border-radius: 4px 4px 0 0;
+      }
+      &:last-child {
+        border-radius: 0 0 4px 4px;
+      }
+    }
   }
 `;
 
 export const MultipleFields = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  max-width: 186px;
   gap: 5px;
 `;
 
@@ -131,4 +146,14 @@ export const SubmitButton = styled.button<{ isCancel: boolean }>`
     background-color: ${(props) =>
       props.isCancel ? '#71717A55' : '#8B5CF655'};
   }
+`;
+
+export const OptionDay = styled.div<{ isSelected?: boolean }>`
+  width: 30px;
+  height: 30px;
+  background-color: ${props => props.isSelected ? '#8B5CF6' : '#18181B'};
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 10px;
+  cursor: pointer;
 `;

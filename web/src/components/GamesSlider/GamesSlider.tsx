@@ -6,9 +6,17 @@ import { imgGame } from '../../assets';
 import GameCard from './GameCard/GameCard';
 
 const GamesSlider: React.FC = () => {
+  const handleSlide = (direction: 'right' | 'left') => {
+    if (direction === 'right') {
+      console.log('direita');
+      return;
+    }
+    console.log('esquerda');
+  };
+
   return (
     <C.GamesSliderContainer>
-      <C.ArrowBox>
+      <C.ArrowBox onClick={() => handleSlide('left')}>
         <IoIosArrowBack />
       </C.ArrowBox>
       <C.Slider>
@@ -19,7 +27,7 @@ const GamesSlider: React.FC = () => {
           />
         </C.InnerSlider>
       </C.Slider>
-      <C.ArrowBox>
+      <C.ArrowBox onClick={() => handleSlide('right')}>
         <IoIosArrowForward />
       </C.ArrowBox>
     </C.GamesSliderContainer>
