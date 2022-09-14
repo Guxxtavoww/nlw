@@ -62,6 +62,10 @@ export const InputContainer = styled.div<{ isSubmit?: boolean }>`
   justify-content: ${(props) => (!props.isSubmit ? 'center' : 'flex-end')};
   flex-wrap: wrap;
   gap: 1rem;
+
+  @media screen and (max-width: 440px) {
+    flex-direction: column;
+  }
 `;
 
 export const InputBx = styled.div<{ isCheckbox?: boolean }>`

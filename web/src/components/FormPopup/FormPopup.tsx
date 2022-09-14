@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import * as C from './styles';
+import { IFormData } from '../../types';
 import { controllerIcon } from '../../assets';
 
 interface IFormPopupProps {
@@ -8,6 +9,23 @@ interface IFormPopupProps {
 }
 
 const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
+  const [formData, setFormData] = useState<IFormData>({
+    gamename: '',
+    name: '',
+    gameYears: '',
+    discordName: '',
+    whenYouPlay: [''],
+    dailyHrs: '',
+    gameTime: '',
+    hasMic: true
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
+
   const handleClose = () => closePopup(false);
 
   return (
@@ -48,6 +66,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   type="text"
                   name="gameYears"
                   id="gameYears"
+                  pattern="[0-9]*"
                   placeholder="Tudo bem ser ZERO"
                 />
               </C.InputBx>
@@ -65,22 +84,20 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
             </C.InputContainer>
             <C.InputContainer>
               <C.InputBx>
-                <C.InputLabel htmlFor="gameYears">
+                <C.InputLabel htmlFor="whenYouPlay">
                   Quando costuma jogar?
                 </C.InputLabel>
                 <input
                   type="text"
-                  name="gameYears"
-                  id="gameYears"
+                  name="whenYouPlay"
+                  id="whenYouPlay"
+                  pattern="[0-9]*"
                   placeholder="Tudo bem ser ZERO"
                 />
               </C.InputBx>
               <C.InputBx>
-                <C.InputLabel>Qual horário do dia</C.InputLabel>
-                <C.MultipleFields>
-                  <input type="text" placeholder="De" />
-                  <input type="text" placeholder="Até" />
-                </C.MultipleFields>
+                <C.InputLabel>Quantas horas você joga ?</C.InputLabel>
+                <input type="text" name="dailyHrs" id="dailyHrs" placeholder="Horas Diárias" />
               </C.InputBx>
             </C.InputContainer>
             <C.InputContainer>
