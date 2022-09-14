@@ -17,16 +17,27 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
     whenYouPlay: [''],
     dailyHrs: '',
     gameTime: '',
-    hasMic: true
+    hasMic: 'on',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value, type } = e.target;
+
+    if (type === 'checkbox') {
+      setFormData((prevState) => ({
+        ...prevState,
+        hasMic: prevState.hasMic === 'on' ? 'off' : 'on',
+      }));
+    }
 
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleClose = () => closePopup(false);
+
+  console.log(formData);
 
   return (
     <C.FormPopupContainer className="app_flex">
@@ -37,7 +48,12 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
             <C.InputContainer>
               <C.InputBx>
                 <C.InputLabel htmlFor="gamename">Qual o game?</C.InputLabel>
-                <select name="gamename" id="gamename" value="">
+                <select
+                  name="gamename"
+                  id="gamename"
+                  value={formData.gamename}
+                  onChange={handleChange}
+                >
                   <option value="" disabled>
                     Selecione o game que deseja jogar
                   </option>
@@ -54,6 +70,8 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   name="name"
                   id="name"
                   placeholder="Como te chamam dentro do game?"
+                  value={formData.name}
+                  onChange={handleChange}
                 />
               </C.InputBx>
             </C.InputContainer>
@@ -68,6 +86,8 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   id="gameYears"
                   pattern="[0-9]*"
                   placeholder="Tudo bem ser ZERO"
+                  value={formData.gameYears}
+                  onChange={handleChange}
                 />
               </C.InputBx>
               <C.InputBx>
@@ -79,6 +99,8 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   name="discordName"
                   id="discordName"
                   placeholder="Usuario#0000"
+                  value={formData.discordName}
+                  onChange={handleChange}
                 />
               </C.InputBx>
             </C.InputContainer>
@@ -97,12 +119,25 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
               </C.InputBx>
               <C.InputBx>
                 <C.InputLabel>Quantas horas você joga ?</C.InputLabel>
-                <input type="text" name="dailyHrs" id="dailyHrs" placeholder="Horas Diárias" />
+                <input
+                  type="text"
+                  name="dailyHrs"
+                  id="dailyHrs"
+                  placeholder="Horas Diárias"
+                  value={formData.dailyHrs}
+                  onChange={handleChange}
+                />
               </C.InputBx>
             </C.InputContainer>
             <C.InputContainer>
               <C.InputBx isCheckbox>
-                <input type="checkbox" name="hasMic" id="hasMic" checked />
+                <input
+                  type="checkbox"
+                  name="hasMic"
+                  id="hasMic"
+                  checked={formData.hasMic === 'on' ? true : false}
+                  onChange={handleChange}
+                />
                 <C.InputLabel htmlFor="hasMic">
                   Você tem microfone?
                 </C.InputLabel>

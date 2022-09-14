@@ -10,5 +10,5 @@ export interface IFormData {
   whenYouPlay: string[];
   gameTime: string;
   dailyHrs: string;
-  hasMic: boolean;
+  hasMic: 'on' | 'off';
 }
