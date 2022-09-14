@@ -13,7 +13,10 @@ const GamesSlider: React.FC = () => {
       </C.ArrowBox>
       <C.Slider>
         <C.InnerSlider>
-          <GameCard image={imgGame} gameLink="https://www.twitch.tv/search?term=cs%20go" />
+          <GameCard
+            image={imgGame}
+            gameLink="https://www.twitch.tv/search?term=cs%20go"
+          />
         </C.InnerSlider>
       </C.Slider>
       <C.ArrowBox>

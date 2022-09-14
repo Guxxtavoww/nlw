@@ -39,7 +39,11 @@ export const GameContent = styled.div`
   justify-content: flex-end;
   padding: 1rem;
   height: 50%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 67.08%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.9) 67.08%
+  );
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
   @media screen and (max-width: 500px) {

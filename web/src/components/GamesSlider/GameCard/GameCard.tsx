@@ -9,7 +9,11 @@ interface IGameCardProps {
 
 const GameCard: React.FC<IGameCardProps> = ({ image, gameLink }) => {
   return (
-    <C.GameCardContainer href={gameLink} target="_blank" rel="noopener noreferrer">
+    <C.GameCardContainer
+      href={gameLink}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <C.GameCardImg src={image} />
       <C.GameCardInnerWrapper>
         <C.GameContent>

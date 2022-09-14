@@ -5,7 +5,7 @@ export const ContentContainer = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   padding: 0 1rem;
 
   @media screen and (max-width: 600px) {
@@ -15,7 +15,7 @@ export const ContentContainer = styled.section`
 
 export const ContentTitle = styled.h2`
   color: #fff;
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(1.25rem, 64px, 18vmin);
   letter-spacing: -1.43px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -28,4 +28,16 @@ export const ContentTitle = styled.h2`
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+`;
+
+export const PublishBox = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 1425px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+  border: 1px solid;
+  border-image-source: linear-gradient(90deg, #9572FC 0%, #43E7AD 50.52%, #E2D45C 100%);
 `;
