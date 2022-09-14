@@ -29,15 +29,3 @@ export const ContentTitle = styled.h2`
     background-clip: text;
   }
 `;
-
-export const PublishBox = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 1425px;
-  padding: 1.5rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 8px;
-  border: 1px solid;
-  border-image-source: linear-gradient(90deg, #9572FC 0%, #43E7AD 50.52%, #E2D45C 100%);
-`;
