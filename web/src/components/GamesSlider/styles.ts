@@ -5,7 +5,7 @@ export const GamesSliderContainer = styled.div`
   width: 100%;
   padding: 0 1.5rem;
   display: grid;
-  grid-template-columns: .5fr 4fr .5fr;
+  grid-template-columns: 0.5fr 4fr 0.5fr;
   gap: 5px;
 
   @media screen and (max-width: 600px) {
@@ -14,15 +14,19 @@ export const GamesSliderContainer = styled.div`
 `;
 
 export const Slider = styled.div`
-    overflow-x: hidden;
+  max-width: 100%;
+  position: relative;
 `;
 
 export const InnerSlider = styled.div`
-    
+  overflow-x: hidden;
+  display: flex;
+  gap: 1rem;
+  width: 100%;
 `;
 
 export const ArrowBox = styled.button`
-  color: #A1A1AA;
+  color: #a1a1aa;
   font-size: 1.8rem;
 
   &:hover {
