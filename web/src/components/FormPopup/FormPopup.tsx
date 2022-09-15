@@ -34,7 +34,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
   };
 
   const handleWhenYouPlay = () => {
-    
+    console.log('func');
   };
 
   const handleSubmit = useCallback((e: React.SyntheticEvent<HTMLFormElement>) => {

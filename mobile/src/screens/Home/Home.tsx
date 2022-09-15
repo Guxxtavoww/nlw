@@ -16,16 +16,19 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.scrollAlign}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.scrollAlign}
+    >
       <Image source={logoImg} defaultSource={logoImg} style={styles.logo} />
       <Header
         title="Encontre seu duo!"
         subTitle="Selecione o game que deseja jogar..."
       />
-      <FlatList 
+      <FlatList
         horizontal
         data={games}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.contentList}
         renderItem={({ item, index }) => <GameCard data={item} key={index} />}

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   scrollAlign: {
     alignItems: 'center',
-  }
+  },
 });
 
 export default styles;
