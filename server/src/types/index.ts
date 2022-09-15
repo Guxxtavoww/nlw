@@ -1,4 +1,4 @@
-export interface IAds {
+export interface IAd {
   gamename: string;
   name: string;
   gameYears: string;
@@ -7,4 +7,5 @@ export interface IAds {
   dailyHrs: string;
   hasMic: boolean;
   whenYouPlay: string[];
+  createdAt?: Date;
 }

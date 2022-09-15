@@ -1,8 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import { AxiosResponse } from 'axios';
+import React, { useCallback, useState, useLayoutEffect } from 'react';
 
 import * as C from './styles';
-import { IFormData } from '../../types';
+import { baseRequest } from '../../api';
 import { controllerIcon } from '../../assets';
+import { IFormData, IApiGame } from '../../types';
 
 interface IFormPopupProps {
   closePopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,6 +14,7 @@ const days = ['DO', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
 
 const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
   const [hasMic, setHasMic] = useState(true);
+  const [games, setGames] = useState<IApiGame[]>([]);
   const [whenYouPlay, setWhenYouPlay] = useState<string[]>(['DO', 'SAB']);
 
   const [formData, setFormData] = useState<IFormData>({
@@ -33,22 +36,48 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleWhenYouPlay = useCallback((day: string) => {
-    if (whenYouPlay.indexOf(day) === -1) {
-      setWhenYouPlay([...whenYouPlay, day]);
-  
-      return;
-    }
-    setWhenYouPlay(whenYouPlay.filter(item => item !== day));
-  }, [whenYouPlay, setWhenYouPlay]);
+  const handleWhenYouPlay = useCallback(
+    (day: string) => {
+      if (whenYouPlay.indexOf(day) === -1) {
+        setWhenYouPlay([...whenYouPlay, day]);
 
-  const handleSubmit = useCallback((e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
+        return;
+      }
+      setWhenYouPlay(whenYouPlay.filter((item) => item !== day));
+    },
+    [whenYouPlay, setWhenYouPlay],
+  );
 
-    const data = { ...formData, hasMic, whenYouPlay };
+  const handleSubmit = useCallback(
+    (e: React.SyntheticEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    console.log(data);
-  }, [whenYouPlay, hasMic]);
+      const data = {
+        ...formData,
+        hasMic,
+        whenYouPlay: whenYouPlay.join(','),
+        gameYears: Number(formData.gameYears),
+        createdAt: new Date(),
+      };
+
+      console.log(data);
+    },
+    [whenYouPlay, hasMic, formData.gameYears],
+  );
+
+  useLayoutEffect(() => {
+    baseRequest
+      .get<AxiosResponse<IApiGame[]>>('/games')
+      .then((res) => {
+        const options = res.data.data.map((r) => ({
+          title: r.title,
+          id: r.id,
+        }));
+
+        setGames(options);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <C.FormPopupContainer className="app_flex">
@@ -68,6 +97,11 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   <option value="" disabled>
                     Selecione o game que deseja jogar
                   </option>
+                  {games.map((game) => (
+                    <option value={game.title} key={game.id}>
+                      {game.title}
+                    </option>
+                  ))}
                 </select>
               </C.InputBx>
             </C.InputContainer>
@@ -122,10 +156,12 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                 </C.InputLabel>
                 <C.MultipleFields>
                   {days.map((item, index) => (
-                    <C.OptionDay 
-                      key={index} 
-                      className="app_flex" 
-                      isSelected={whenYouPlay.find(day => day === item) ? true : false}
+                    <C.OptionDay
+                      key={index}
+                      className="app_flex"
+                      isSelected={
+                        whenYouPlay.find((day) => day === item) ? true : false
+                      }
                       onClick={() => handleWhenYouPlay(item)}
                     >
                       {item}

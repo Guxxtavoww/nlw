@@ -3,7 +3,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    return;
+  return;
 });
 
 export default router;

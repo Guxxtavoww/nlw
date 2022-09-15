@@ -128,6 +128,7 @@ export const MultipleFields = styled.div`
 export const InputLabel = styled.label`
   font-size: 14px;
   font-weight: 600;
+  user-select: none;
 `;
 
 export const SubmitButton = styled.button<{ isCancel: boolean }>`
@@ -156,4 +157,5 @@ export const OptionDay = styled.div<{ isSelected?: boolean }>`
   border-radius: 4px;
   font-size: 10px;
   cursor: pointer;
+  transition: all .15s;
 `;
