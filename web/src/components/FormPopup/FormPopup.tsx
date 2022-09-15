@@ -12,7 +12,7 @@ const days = ['DO', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
 
 const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
   const [hasMic, setHasMic] = useState(true);
-  const [whenYouPlay, setWhenYouPlay] = useState<string[]>(days);
+  const [whenYouPlay, setWhenYouPlay] = useState<string[]>(['DO', 'SAB']);
 
   const [formData, setFormData] = useState<IFormData>({
     gamename: '',
@@ -33,9 +33,14 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleWhenYouPlay = () => {
-    console.log('func');
-  };
+  const handleWhenYouPlay = useCallback((day: string) => {
+    if (whenYouPlay.indexOf(day) === -1) {
+      setWhenYouPlay([...whenYouPlay, day]);
+  
+      return;
+    }
+    setWhenYouPlay(whenYouPlay.filter(item => item !== day));
+  }, [whenYouPlay, setWhenYouPlay]);
 
   const handleSubmit = useCallback((e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,7 +48,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
     const data = { ...formData, hasMic, whenYouPlay };
 
     console.log(data);
-  }, []);
+  }, [whenYouPlay, hasMic]);
 
   return (
     <C.FormPopupContainer className="app_flex">
@@ -120,8 +125,8 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                     <C.OptionDay 
                       key={index} 
                       className="app_flex" 
-                      isSelected={item === whenYouPlay[index]} 
-                      onClick={handleWhenYouPlay}
+                      isSelected={whenYouPlay.find(day => day === item) ? true : false}
+                      onClick={() => handleWhenYouPlay(item)}
                     >
                       {item}
                     </C.OptionDay>
