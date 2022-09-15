@@ -1,10 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Image } from 'react-native';
+
+import styles from './styles';
+import { Header } from '../../components';
+import logoImg from '../../assets/logo-nlw-esports.png';
 
 const Home: React.FC = () => {
   return (
-    <View>
-      <Text>Home</Text>
+    <View style={styles.container}>
+      <Image source={logoImg} defaultSource={logoImg} style={styles.logo} />
+      <Header title="CS GO" subTitle="Conecte-se e comece a jogar!" />
     </View>
   );
 };
