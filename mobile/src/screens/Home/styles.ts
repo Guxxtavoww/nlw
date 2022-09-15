@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
   },
   logo: {
     width: 214,
@@ -11,6 +10,14 @@ const styles = StyleSheet.create({
     marginTop: 74,
     marginBottom: 48,
   },
+  contentList: {
+    paddingLeft: 32,
+    paddingRight: 64,
+    paddingBottom: 32,
+  },
+  scrollAlign: {
+    alignItems: 'center',
+  }
 });
 
 export default styles;
