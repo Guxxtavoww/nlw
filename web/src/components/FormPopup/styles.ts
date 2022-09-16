@@ -107,6 +107,8 @@ export const InputBx = styled.div<{ isCheckbox?: boolean }>`
   select {
     cursor: pointer;
     option {
+      padding: 8px;
+      cursor: pointer;
       &:first-child {
         border-radius: 4px 4px 0 0;
       }
@@ -152,10 +154,10 @@ export const SubmitButton = styled.button<{ isCancel: boolean }>`
 export const OptionDay = styled.div<{ isSelected?: boolean }>`
   width: 30px;
   height: 30px;
-  background-color: ${props => props.isSelected ? '#8B5CF6' : '#18181B'};
+  background-color: ${(props) => (props.isSelected ? '#8B5CF6' : '#18181B')};
   padding: 4px;
   border-radius: 4px;
   font-size: 10px;
   cursor: pointer;
-  transition: all .15s;
+  transition: all 0.15s;
 `;

@@ -32,7 +32,6 @@ export const Loading = styled.span`
   letter-spacing: 3px;
 `;
 
-
 export const ArrowBox = styled.button`
   color: #a1a1aa;
   font-size: 1.8rem;

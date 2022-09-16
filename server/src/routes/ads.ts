@@ -5,19 +5,19 @@ import { IAd } from '../types';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    return;
+  return;
 });
 
 router.post('/create-ad', async (req: Request<unknown, unknown, IAd>, res) => {
-    const formData = req.body;
+  const formData = req.body;
 
-    return;
+  return;
 });
 
 router.get('/ad-per-game/:game', (req, res) => {
-    const { game } = req.params;
+  const { game } = req.params;
 
-    return game;
+  return game;
 });
 
 export default router;

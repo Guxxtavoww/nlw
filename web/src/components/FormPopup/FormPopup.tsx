@@ -62,19 +62,14 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
 
       console.log(data);
     },
-    [whenYouPlay, hasMic, formData.gameYears],
+    [whenYouPlay, hasMic, formData],
   );
 
   useLayoutEffect(() => {
     baseRequest
-      .get<AxiosResponse<IApiGame[]>>('/games')
+      .get('/games?withOutImg=1')
       .then((res) => {
-        const options = res.data.data.map((r) => ({
-          title: r.title,
-          id: r.id,
-        }));
-
-        setGames(options);
+        setGames(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
