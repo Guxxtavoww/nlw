@@ -20,10 +20,32 @@ router.get('/', cors(), async (req, res) => {
   return res.status(200).json(games);
 });
 
-router.get('/:id/ads', cors(), async (req, res) => {
-  const { id } = req.params;
+router.get('/:gameId/ads', cors(), async (req, res) => {
+  const { gameId } = req.params;
 
-  return;
+  const ads = await prisma.ad.findMany({
+    select: {
+      id: true,
+      name: true,
+      whenYouPlay: true,
+      hasMic: true,
+      gameYears: true,
+      gamename: true,
+      dailyHrs: true,
+      gameTime: true,
+      game: true,
+    },
+    where: {
+      gameId,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    }
+  });
+
+  if (!ads.length) return res.status(204).json('Não há conteúdo');
+
+  return res.status(200).json(ads.map(ad => ({ ...ad, whenYouPlay: ad.whenYouPlay.split(',')  })));
 });
 
 export default router;
