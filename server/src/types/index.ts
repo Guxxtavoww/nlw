@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 export interface IAd {
   gamename: string;
   name: string;
@@ -6,6 +8,8 @@ export interface IAd {
   gameTime: string;
   dailyHrs: string;
   hasMic: boolean;
-  whenYouPlay: string[];
+  whenYouPlay: string;
   createdAt?: Date;
 }
+
+export type RequestType<T> = Request<T, unknown, IAd>;
