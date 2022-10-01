@@ -32,5 +32,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-// https://app.rocketseat.com.br/event/nlw-09/ignite/aula-2 11:22:07
