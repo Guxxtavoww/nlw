@@ -43,7 +43,7 @@ router.post('/game/:gameId/create-ad', cors(), async (req: RequestType<{ gameId:
 router.get('/ad-per-game/:game', cors(), (req, res) => {
   const { game } = req.params;
 
-  return game;
+  return res.send(game);
 });
 
 router.get('/:id/discord', cors(), async (req, res) => {
