@@ -12,4 +12,10 @@ export interface IAd {
   createdAt?: Date;
 }
 
-export type RequestType<T> = Request<T, unknown, IAd>;
+export interface IGame {
+  id?: string;
+  title: string;
+  bannerUrl: string;
+}
+
+export type RequestType<T, P> = Request<T, unknown, P>;

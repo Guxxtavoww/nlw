@@ -9,7 +9,7 @@ import discord from './routes/discord';
 config();
 
 const app = express();
-const PORT = process.env.PORT || '';
+const PORT = process.env.PORT || 5000;
 
 app.use('/server/ads', ads);
 app.use('/server/games', games);

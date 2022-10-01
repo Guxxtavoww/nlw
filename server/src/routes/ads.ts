@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 
-import { RequestType } from '../types';
+import { IAd, RequestType } from '../types';
 import { PrismaClient } from '@prisma/client';
 
 const router = express.Router();
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   return res.status(200).json(ads);
 });
 
-router.post('/game/:gameId/create-ad', cors(), async (req: RequestType<{ gameId: string }>, res) => {
+router.post('/:gameId/create-ad', cors(), async (req: RequestType<{ gameId: string }, IAd>, res) => {
   const formData = req.body;
   const { gameId } = req.params;
 
