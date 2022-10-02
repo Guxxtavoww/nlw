@@ -4,7 +4,6 @@ import { config } from 'dotenv';
 
 import ads from './routes/ads';
 import games from './routes/games';
-import discord from './routes/discord';
 
 config();
 
@@ -13,7 +12,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use('/server/ads', ads);
 app.use('/server/games', games);
-app.use('/server/discord', discord);
 
 app.use(cors());
 app.use(express.json());
