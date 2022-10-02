@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client';
 const router = express.Router();
 const prisma = new PrismaClient();
 
-router.get('/', async (req, res) => {
+router.get('/', cors(), async (req, res) => {
   const ads = await prisma.ad.findMany();
 
   if (!ads.length) return res.status(204).json('Não há conteúdo');
