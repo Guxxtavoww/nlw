@@ -15,7 +15,7 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('theme', JSON.stringify(theme));
+    console.log(theme);
   }, [theme]);
 
   return (
