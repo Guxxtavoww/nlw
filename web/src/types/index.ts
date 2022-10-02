@@ -13,6 +13,5 @@ export interface IFormData {
   name: string;
   gameYears: string;
   discordName: string;
-  gameTime: string;
   dailyHrs: string;
 }

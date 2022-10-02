@@ -22,7 +22,6 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
     gameYears: '',
     discordName: '',
     dailyHrs: '',
-    gameTime: '',
   });
 
   const handleChange = (
@@ -56,6 +55,8 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
         gameYears: Number(formData.gameYears),
         createdAt: new Date(),
       };
+
+      console.log({...data});
 
       baseRequest
         .post(`ads/${formData.gamename}/create-ad`, { ...data })
