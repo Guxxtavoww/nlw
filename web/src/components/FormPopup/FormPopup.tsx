@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useLayoutEffect } from 'react';
 
 import * as C from './styles';
@@ -117,6 +116,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   placeholder="Como te chamam dentro do game?"
                   value={formData.name}
                   onChange={handleChange}
+                  required
                 />
               </C.InputBx>
             </C.InputContainer>
@@ -146,6 +146,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   placeholder="Usuario#0000"
                   value={formData.discordName}
                   onChange={handleChange}
+                  required
                 />
               </C.InputBx>
             </C.InputContainer>
@@ -177,6 +178,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   id="dailyHrs"
                   placeholder="Horas Diárias"
                   value={formData.dailyHrs}
+                  required
                   onChange={handleChange}
                 />
               </C.InputBx>
@@ -189,6 +191,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   id="hasMic"
                   defaultChecked={hasMic}
                   onChange={() => setHasMic((prevState) => !prevState)}
+                  required
                 />
                 <C.InputLabel htmlFor="hasMic">
                   Você tem microfone?
