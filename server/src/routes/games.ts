@@ -35,7 +35,6 @@ router.get('/:gameId/ads', cors(), async (req, res) => {
       gameYears: true,
       gamename: true,
       dailyHrs: true,
-      gameTime: true,
       game: true,
     },
     where: {

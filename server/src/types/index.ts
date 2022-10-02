@@ -5,7 +5,6 @@ export interface IAd {
   name: string;
   gameYears: string;
   discordName: string;
-  gameTime: string;
   dailyHrs: string;
   hasMic: boolean;
   whenYouPlay: string;

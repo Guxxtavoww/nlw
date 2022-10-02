@@ -27,7 +27,6 @@ router.post('/:gameId/create-ad', cors(), async (req: RequestType<{ gameId: stri
         dailyHrs: formData.dailyHrs,
         discordName: formData.discordName,
         hasMic: formData.hasMic,
-        gameTime: formData.gameTime,
         gameYears: Number(formData.gameYears),
         gamename: formData.gamename,
         whenYouPlay: formData.whenYouPlay,
