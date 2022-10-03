@@ -14,16 +14,19 @@ const Home: React.FC = () => {
 
   const getApiGames = useCallback(() => {
     setLoading(true);
+
     baseRequest
       .get('/games')
       .then(({ data }) => {
-        setLoading(false);
         setGames(data);
       })
       .catch((err) => {
         setGames([]);
         setLoading(false);
         console.log(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 

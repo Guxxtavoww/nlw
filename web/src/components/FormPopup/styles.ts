@@ -1,12 +1,12 @@
 import styled, { keyframes } from 'styled-components';
 
 const showPopup = keyframes`
-    from {
-      scale: 0;
-    }
-    to {
-      scale: 1;
-    }
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
 `;
 
 export const FormPopupContainer = styled.div`
@@ -18,17 +18,17 @@ export const FormPopupContainer = styled.div`
   padding: 1rem;
   background-color: #1e1e1e88;
   z-index: 10000;
-  animation: ${showPopup} 0.15s forwards;
   @media screen and (max-width: 500px) {
     padding: 10px;
     & > * {
       padding: 1rem;
     }
   }
-`;
+  `;
 
 export const Popup = styled.div`
   width: 100%;
+  animation: ${showPopup} 0.15s forwards;
   max-width: 488px;
   min-height: max-content;
   padding: 2rem 40px;

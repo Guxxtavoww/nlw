@@ -21,7 +21,6 @@ model Ad {
   name        String
   gameYears   Int
   discordName String
-  gameTime    String
   dailyHrs    String
   hasMic      Boolean
   whenYouPlay String

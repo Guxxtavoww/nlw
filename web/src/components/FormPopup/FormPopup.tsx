@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useLayoutEffect } from 'react';
 
 import * as C from './styles';
@@ -23,10 +22,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
     gameYears: '',
     discordName: '',
     dailyHrs: '',
-    gameTime: '',
   });
-
-  const handleClose = () => closePopup(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -60,7 +56,16 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
         createdAt: new Date(),
       };
 
-      console.log(data);
+      console.log({...data});
+
+      baseRequest
+        .post(`ads/${formData.gamename}/create-ad`, { ...data })
+        .then(() => {
+          closePopup(false);
+        })
+        .catch((err) => {
+          alert('Algo deu errado' + err);
+        });
     },
     [whenYouPlay, hasMic, formData],
   );
@@ -93,7 +98,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                     Selecione o game que deseja jogar
                   </option>
                   {games.map((game) => (
-                    <option value={game.title} key={game.id}>
+                    <option value={game.id} key={game.id}>
                       {game.title}
                     </option>
                   ))}
@@ -112,6 +117,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   placeholder="Como te chamam dentro do game?"
                   value={formData.name}
                   onChange={handleChange}
+                  required
                 />
               </C.InputBx>
             </C.InputContainer>
@@ -141,6 +147,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   placeholder="Usuario#0000"
                   value={formData.discordName}
                   onChange={handleChange}
+                  required
                 />
               </C.InputBx>
             </C.InputContainer>
@@ -172,6 +179,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   id="dailyHrs"
                   placeholder="Horas Diárias"
                   value={formData.dailyHrs}
+                  required
                   onChange={handleChange}
                 />
               </C.InputBx>
@@ -184,6 +192,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
                   id="hasMic"
                   defaultChecked={hasMic}
                   onChange={() => setHasMic((prevState) => !prevState)}
+                  required
                 />
                 <C.InputLabel htmlFor="hasMic">
                   Você tem microfone?
@@ -191,7 +200,7 @@ const FormPopup: React.FC<IFormPopupProps> = ({ closePopup }) => {
               </C.InputBx>
             </C.InputContainer>
             <C.InputContainer isSubmit>
-              <C.SubmitButton isCancel onClick={handleClose}>
+              <C.SubmitButton isCancel onClick={() => closePopup(false)}>
                 Cancelar
               </C.SubmitButton>
               <C.SubmitButton isCancel={false} type="submit">

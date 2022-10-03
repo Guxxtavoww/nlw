@@ -118,4 +118,14 @@ export const AppHeader = styled.div`
   }
 `;
 
+export const ThemeButton = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: ${props => props.theme.colors.buttonTheme};
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1000;
+`;
+
 export default GlobalStyle;

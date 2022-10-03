@@ -1,28 +1,51 @@
-import express, { Request } from 'express';
+import cors from 'cors';
+import express from 'express';
 
-import { IAd } from '../types';
+import { IAd, RequestType } from '../types';
 import { PrismaClient } from '@prisma/client';
 
 const router = express.Router();
 const prisma = new PrismaClient();
 
-router.get('/', async (req, res) => {
-  return;
+router.get('/', cors(), async (req, res) => {
+  const ads = await prisma.ad.findMany();
+
+  if (!ads.length) return res.status(204).json('Não há conteúdo');
+
+  return res.status(200).json(ads);
 });
 
-router.post('/create-ad', async (req: Request<unknown, unknown, IAd>, res) => {
+router.post('/:gameId/create-ad', cors(), async (req: RequestType<{ gameId: string }, IAd>, res) => {
   const formData = req.body;
+  const { gameId } = req.params;
 
-  return;
+  try {
+    const newAd = await prisma.ad.create({
+      data: {
+        gameId,
+        name: formData.name,
+        dailyHrs: formData.dailyHrs,
+        discordName: formData.discordName,
+        hasMic: formData.hasMic,
+        gameYears: Number(formData.gameYears),
+        gamename: formData.gamename,
+        whenYouPlay: formData.whenYouPlay,
+      }
+    });
+
+    return res.status(200).json(newAd);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 });
 
-router.get('/ad-per-game/:game', (req, res) => {
+router.get('/ad-per-game/:game', cors(), (req, res) => {
   const { game } = req.params;
 
-  return game;
+  return res.send(game);
 });
 
-router.get('/:id/discord', async (req, res) => {
+router.get('/:id/discord', cors(), async (req, res) => {
   const { id } = req.params;
 
   const discord = prisma.ad.findUnique({
