@@ -21,6 +21,7 @@ const Home: React.FC = () => {
         setGames(data);
       })
       .catch((err) => {
+        setGames([]);
         setLoading(false);
         console.log(err.message);
       });
@@ -46,6 +47,7 @@ const Home: React.FC = () => {
         <FlatList
           horizontal
           data={games}
+          ListEmptyComponent={<Loader text="Sem dados" />}
           keyExtractor={(item) => item.id}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.contentList}

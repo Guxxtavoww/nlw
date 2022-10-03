@@ -1,8 +1,6 @@
-import { ImageSourcePropType } from 'react-native';
-
 export interface IGame {
   id: string;
-  bannerUrl: ImageSourcePropType;
+  bannerUrl: string;
   title: string;
   ads?: string;
 }
